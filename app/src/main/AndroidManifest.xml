@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CategoryActivity" >
+        <activity android:name=".ui.CategoryActivity" >
 
         </activity>
-        <activity android:name=".CartActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.CartActivity" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
