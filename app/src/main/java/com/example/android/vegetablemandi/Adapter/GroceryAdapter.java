@@ -97,6 +97,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
             description = itemView.findViewById(R.id.description);
             this.onCartClickListener = onCartClickListener;
             increment.setOnClickListener(this);
+            decrement.setOnClickListener(this);
 
 //            increment.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -123,11 +124,17 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
 
         @Override
         public void onClick(View v) {
-            onCartClickListener.onAddItemClick(getAdapterPosition());
+            if(v == decrement) {
+                onCartClickListener.onDeleteItemClick(getAdapterPosition());
+            }
+            else if (v == increment) {
+                onCartClickListener.onAddItemClick(getAdapterPosition());
+            }
         }
     }
 
     public interface OnCartClickListener {
         void onAddItemClick(int position);
+        void onDeleteItemClick(int position);
     }
 }

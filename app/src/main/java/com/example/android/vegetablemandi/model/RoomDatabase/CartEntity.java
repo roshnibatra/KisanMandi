@@ -99,10 +99,6 @@ public class CartEntity {
         this.logo = logo;
     }
 
-    public int getCart_quantity() {
-        return actual_quantity;
-    }
-
     public void setCart_quantity(int cart_quantity) {
         this.actual_quantity = cart_quantity;
     }

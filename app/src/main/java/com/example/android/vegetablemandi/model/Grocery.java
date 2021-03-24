@@ -11,15 +11,14 @@ public class Grocery {
     String formatted_price;
     int category_id;
     Category category;
-    int cart_quantity;
 
-    public Grocery(String name, String logo, int minimum_quantity, String formatted_price, Category category, int cart_quantity) {
+
+    public Grocery(String name, String logo, int minimum_quantity, String formatted_price, Category category) {
         this.name = name;
         this.logo = logo;
         this.minimum_quantity = minimum_quantity;
         this.formatted_price = formatted_price;
         this.category = category;
-        this.cart_quantity = cart_quantity;
     }
 
     public String getIcon() {
@@ -102,11 +101,4 @@ public class Grocery {
         this.category = category;
     }
 
-    public int getCart_quantity() {
-        return cart_quantity;
-    }
-
-    public void setCart_quantity(int cart_quantity) {
-        this.cart_quantity = cart_quantity;
-    }
 }
