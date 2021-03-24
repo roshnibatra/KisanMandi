@@ -33,7 +33,7 @@ import java.util.List;
     LiveData<CartEntity> getItemByName(String name);
 
     @Query("UPDATE cart_table SET quantity = quantity + 1 WHERE vegetable_name = :name")
-    void updateQuantity(String name);
+    int updateQuantity(String name);
 
     @Query("SELECT * from cart_table WHERE vegetable_name= :name")
     List<CartEntity> getItemById(String name);

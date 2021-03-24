@@ -83,9 +83,9 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
     @Override
     public void onAddItemClick(final int position) {
 
-
-//        cartViewModel.delete(grocery);
-//        cartViewModel.deleteAll();
+        CartEntity ce = cartAdapter.getNoteAt(position);
+        cartViewModel.updateQuantity(ce.name);
+      //  ce.setActual_quantity();
     }
 //
     @Override
@@ -106,6 +106,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
 //            }
 //        });
 
+        if(cartAdapter.getNoteAt(position).getActual_quantity() == 1)
         cartViewModel.delete(cartAdapter.getNoteAt(position));
     }
 }

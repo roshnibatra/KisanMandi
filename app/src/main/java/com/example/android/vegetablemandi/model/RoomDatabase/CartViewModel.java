@@ -14,6 +14,7 @@ public class CartViewModel extends AndroidViewModel {
     private CartRepository cartRepository;
     private LiveData<List<CartEntity>> allItems;
 
+
     public CartViewModel(@NonNull Application application) {
         super(application);
         cartRepository = new CartRepository(application);
@@ -30,7 +31,7 @@ public class CartViewModel extends AndroidViewModel {
 
 
     public void updateQuantity(String name) {
-        cartRepository.updateQuantity();
+        cartRepository.updateQuantity(name);
     }
 
     public void insert(CartEntity cartEntity) {

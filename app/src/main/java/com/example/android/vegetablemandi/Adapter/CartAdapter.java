@@ -55,12 +55,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CartEntity groceryData = cartList.get(position);
         holder.name.setText(groceryData.getName());
-       // Log.d("Main", "onBindViewHolder: "+groceryData.getLogo());
-//        Log.d("Main", "onBindViewHolder: "+groceryData.getIcon());
        holder.totalPrice.setText("Total Rs"+(double) (groceryData.getPrice() * groceryData.getActual_quantity()));
         Log.d("TAG", "onBindViewHolder: "+(groceryData.getPrice()));
-        Log.d("TAG", "onBindViewHolder: "+groceryData.getActual_quantity());
+        Log.d("TAG", "actual quantity: "+groceryData.getActual_quantity());
         holder.price.setText("Rs "+groceryData.getPrice());
+        holder.actual_quantity.setText(""+(int)groceryData.getActual_quantity());
         holder.minQuantity.setText("Min "+groceryData.getMinimum_quantity()+groceryData.getUnit());
         Glide.with(context)
                 .load(groceryData.getIcon())

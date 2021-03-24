@@ -75,6 +75,10 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         notifyDataSetChanged();
     }
 
+    public Grocery getNoteAt(int position) {
+        return groceryList.get(position);
+    }
+
     public void getAllItemInCart(List<CartEntity> cartEntityList) {
         this.cartEntities = cartEntityList;
     }

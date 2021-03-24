@@ -11,6 +11,7 @@ public class CartRepository {
 
     private CartDao cartDao;
     private LiveData<List<CartEntity>> allCartItem;
+    private int quantity;
 
     public CartRepository(Application application) {
         CartDatabase cartDatabase = CartDatabase.getInstance(application);
@@ -34,8 +35,10 @@ public class CartRepository {
         new DeleteAllItemAsyncTask(cartDao).execute();
     }
 
-    public void updateQuantity() {
-        new UpdateQuantityItemAsyncTask(cartDao).execute();
+    public int updateQuantity(String name) {
+        new UpdateQuantityItemAsyncTask(cartDao).execute(name);
+       // cartDao.updateQuantity(name);
+        return quantity;
     }
 
     public LiveData<CartEntity> getItemByName(String name) {
@@ -107,7 +110,7 @@ public class CartRepository {
         }
     }
 
-    private static class UpdateQuantityItemAsyncTask extends AsyncTask<String, Void, Void> {
+    private static class UpdateQuantityItemAsyncTask extends AsyncTask<String, Void, Integer> {
         private CartDao cartDao;
 
         public UpdateQuantityItemAsyncTask(CartDao cartDao) {
@@ -115,7 +118,7 @@ public class CartRepository {
         }
 
         @Override
-        protected Void doInBackground(String... strings) {
+        protected Integer doInBackground(String... strings) {
             cartDao.updateQuantity(strings[0]);
             return null;
         }

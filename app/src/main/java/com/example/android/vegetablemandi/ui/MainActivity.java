@@ -299,14 +299,13 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
 
        else {
             final Grocery groceryData = groceryList.get(position);
-
 //        CartEntity cartEntity = new CartEntity(groceryData.getName(), (int) groceryData.getPrice(),
 //                BASE_URL+groceryData.getLogo(),groceryData.getCart_quantity()
 //                ,groceryData.getMinimum_quantity());
+            Grocery ge = adapter.getNoteAt(position);
+            String name = ge.getName();
 
             Log.i(TAG, "onAddItemClick: item clicked: " + position);
-
-
             CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
                      1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
            // groceryData.setCart_quantity(groceryData.getCart_quantity() + 1);
@@ -318,23 +317,10 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
 
     @Override
     public void onDeleteItemClick(int position) {
-        if(filterList.size() > 0) {
-            int value =1;
 
-            Grocery groceryData = filterList.get(position);
-            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
-                    1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-            cartViewModel.delete(ce);
-            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Grocery groceryData = groceryList.get(position);
-            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),1
-                    , groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-            cartViewModel.delete(ce);
-            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-        }
+//        LiveData<List<CartEntity>> cartEntityList = cartViewModel.getAllItems();
+//        Grocery ge = adapter.getNoteAt(position);
+//        if(cartEntityList.equals(ge))
+//        cartViewModel.delete();
     }
 }
