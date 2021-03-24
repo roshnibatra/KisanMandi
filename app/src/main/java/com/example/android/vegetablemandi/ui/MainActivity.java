@@ -173,50 +173,52 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
                     Log.i("MainActivity", "response successfully received");
                     Log.i("TAG", "onResponse: " + response.body().getData());
                     recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//                        @Override
+     //                   @Override
 //                        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
 //                            super.onScrollStateChanged(recyclerView, newState);
-//                            if(currentItem < 0) {
-//                               fetchData(response);
+//                            if (currentItem < 0) {
+//                                fetchData(response);
 //                            }
 //                            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
 //
 //                                isScrolling = true;
 //                            }
+//                        }
 
 
-                        @Override
-                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                            super.onScrolled(recyclerView, dx, dy);
-                            currentItem = layoutManager.getChildCount();
-                            totalItem = layoutManager.getItemCount();
-                            scrolledOutItem = layoutManager.findFirstVisibleItemPosition();
 
-                            if (dy > 0) {
-                                if (isScrolling) {
-                                    if (totalItem > scrolledOutItem) {
-                                        isScrolling = false;
-                                        previousScrolledOut = totalItem;
-                                    }
-                                }
-
-                                if(!isScrolling && (totalItem -currentItem) <= (scrolledOutItem+view_threshold))
-                                {
-                                    fetchData(response);
-                                    isScrolling = true;
-                                }
-                                //   fetchData(response);
-//                                if (currentItem == 0) {
-//                                    fetchData(response);
-//                                } else if ((currentItem + scrolledOutItem > totalItem)) {
-//                                    //  fetch new data
-//                                    isScrolling = false;
-//                                    progressBar.setVisibility(View.VISIBLE);
-//                                    fetchData(response);
+//                        @Override
+//                        public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+//                            super.onScrolled(recyclerView, dx, dy);
+//                            currentItem = layoutManager.getChildCount();
+//                            totalItem = layoutManager.getItemCount();
+//                            scrolledOutItem = layoutManager.findFirstVisibleItemPosition();
+//
+//                            if (dy > 0) {
+//                                if (isScrolling) {
+//                                    if (totalItem > scrolledOutItem) {
+//                                        isScrolling = false;
+//                                        previousScrolledOut = totalItem;
+//                                    }
 //                                }
-
-                            }
-                        }
+//
+//                                if(!isScrolling && (totalItem -currentItem) <= (scrolledOutItem+view_threshold))
+//                                {
+//                                    fetchData(response);
+//                                    isScrolling = true;
+//                                }
+//                                //   fetchData(response);
+////                                if (currentItem == 0) {
+////                                    fetchData(response);
+////                                } else if ((currentItem + scrolledOutItem > totalItem)) {
+////                                    //  fetch new data
+////                                    isScrolling = false;
+////                                    progressBar.setVisibility(View.VISIBLE);
+////                                    fetchData(response);
+////                                }
+//
+//                            }
+//                        }
                     });
 
                 }
@@ -254,7 +256,14 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
            }
         }
     }
-
+//
+//    void insertOrUpdate(CartEntity item) {
+//        List<CartEntity> itemsFromDB = cartViewModel.getItemByName(c))
+//        if (itemsFromDB.isEmpty())
+//            cartViewModel.insert(item);
+//        else
+//            cartViewModel.updateQuantity(item.getName());
+//    }
 
     @Override
     public void onAddItemClick(int position) {
@@ -289,23 +298,23 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
 
     @Override
     public void onDeleteItemClick(int position) {
-//        if(filterList.size() > 0) {
-//            int value =1;
-//
-//            Grocery groceryData = filterList.get(position);
-//            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
-//                    1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-//            cartViewModel.delete(ce);
-//            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-//            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-//        }
-//        else {
-//            Grocery groceryData = groceryList.get(position);
-//            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),1
-//                    , groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-//            cartViewModel.delete(ce);
-//            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-//            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-//        }
+        if(filterList.size() > 0) {
+            int value =1;
+
+            Grocery groceryData = filterList.get(position);
+            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
+                    1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
+            cartViewModel.delete(ce);
+            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
+            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Grocery groceryData = groceryList.get(position);
+            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),1
+                    , groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
+            cartViewModel.delete(ce);
+            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
+            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

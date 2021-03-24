@@ -1,11 +1,13 @@
 package com.example.android.vegetablemandi.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.vegetablemandi.Adapter.CartAdapter;
 import com.example.android.vegetablemandi.R;
+import com.example.android.vegetablemandi.model.Grocery;
 import com.example.android.vegetablemandi.model.RoomDatabase.CartEntity;
 import com.example.android.vegetablemandi.model.RoomDatabase.CartViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends AppCompatActivity implements CartAdapter.OnCartClickListener {
 
     RecyclerView recyclerView;
     CartAdapter cartAdapter;
@@ -36,10 +39,11 @@ public class CartActivity extends AppCompatActivity {
         deleteAll = findViewById(R.id.imageView2);
         increment = findViewById(R.id.increment_cart);
         decrement = findViewById(R.id.decrement_cart);
-        cartAdapter = new CartAdapter(this,new ArrayList<CartEntity>());
+        cartAdapter = new CartAdapter(this,new ArrayList<CartEntity>(),this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(cartAdapter);
        // cartAdapter.setCartList(cartEntities);
+        cartEntities = new ArrayList<>();
 
 
         cartViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
@@ -75,4 +79,31 @@ public class CartActivity extends AppCompatActivity {
 //        });
 
     }
+
+    @Override
+    public void onAddItemClick(final int position) {
+
+        Toast.makeText(getApplicationContext(),"onclick happening",Toast.LENGTH_SHORT).show();
+        LiveData<List<CartEntity>> cartEntityList = cartViewModel.getAllItems();
+        cartEntityList.observe(this, new Observer<List<CartEntity>>() {
+            @Override
+            public void onChanged(List<CartEntity> cartEntityList) {
+                try {
+                    if (cartEntityList.get(position).getActual_quantity() == 1 && (cartEntityList.indexOf(cartEntityList.get(position)) < cartEntityList.size())) {
+                        cartViewModel.delete(cartEntityList.get(position));
+                    }
+                }catch (Exception e) {
+                    Log.d("TAG", "onChanged: ");
+                    e.printStackTrace();
+                }
+            }
+        });
+//        cartViewModel.delete(grocery);
+//        cartViewModel.deleteAll();
+    }
+//
+//    @Override
+//    public void onDeleteItemClick(int position) {
+//
+//    }
 }

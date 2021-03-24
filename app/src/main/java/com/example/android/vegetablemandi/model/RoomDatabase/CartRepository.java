@@ -38,6 +38,10 @@ public class CartRepository {
         return cartDao.getItemByName(name);
     }
 
+    public List<CartEntity> updateItem(String name) {
+       return cartDao.getItemById(name);
+    }
+
     public LiveData<List<CartEntity>> getAllCartItem() {
         return allCartItem;
     }
@@ -98,4 +102,18 @@ public class CartRepository {
             return null;
         }
     }
+
+//    private static class UpdateQuantityItemAsyncTask extends AsyncTask<CartEntity, Void, Void> {
+//        private CartDao cartDao;
+//
+//        public UpdateQuantityItemAsyncTask(CartDao cartDao) {
+//            this.cartDao = cartDao;
+//        }
+//
+//        @Override
+//        protected Void doInBackground(CartEntity... cartEntities) {
+//            cartDao.updateQuantity();
+//            return null;
+//        }
+//    }
 }

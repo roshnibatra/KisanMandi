@@ -101,7 +101,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
             this.onCartClickListener = onCartClickListener;
             increment.setOnClickListener(this);
             decrement.setOnClickListener(this);
-          //  itemView.setOnClickListener(this);
+
 
 //            increment.setOnClickListener(new View.OnClickListener() {
 //                @Override
