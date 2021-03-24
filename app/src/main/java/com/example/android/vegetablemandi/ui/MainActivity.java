@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
                 progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
 
-//                    groceryList = response.body().getData();
-//                    adapter.setGroceryList(groceryList);
+                    groceryList = response.body().getData();
+                    adapter.setGroceryList(groceryList);
 
                     Log.i("MainActivity", "response successfully received");
                     Log.i("TAG", "onResponse: " + response.body().getData());
@@ -258,7 +258,8 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
 
     @Override
     public void onAddItemClick(int position) {
-        if(filterList != null) {
+        Log.d(TAG, "onAddItemClick: "+filterList.size());
+        if(filterList.size() > 0) {
             Grocery groceryData = filterList.get(position);
             CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
                     1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
@@ -288,22 +289,23 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
 
     @Override
     public void onDeleteItemClick(int position) {
-        if(filterList != null) {
-            int value =1;
-            Grocery groceryData = filterList.get(position);
-            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
-                    value > 0 ? value++ : 1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-            cartViewModel.delete(ce);
-            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Grocery groceryData = groceryList.get(position);
-            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),1
-                    , groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
-            cartViewModel.delete(ce);
-            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
-            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
-        }
+//        if(filterList.size() > 0) {
+//            int value =1;
+//
+//            Grocery groceryData = filterList.get(position);
+//            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
+//                    1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
+//            cartViewModel.delete(ce);
+//            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
+//            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            Grocery groceryData = groceryList.get(position);
+//            CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),1
+//                    , groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
+//            cartViewModel.delete(ce);
+//            Log.d(TAG, "onDelete: " + BASE_URL + groceryData.getIcon());
+//            Toast.makeText(this, groceryData.getName(), Toast.LENGTH_SHORT).show();
+//        }
     }
 }

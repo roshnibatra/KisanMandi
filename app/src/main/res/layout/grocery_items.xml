@@ -20,7 +20,7 @@
             android:layout_height="210dp"
             android:orientation="vertical"
             android:weightSum="2"
-            android:layout_marginLeft="16dp">
+            android:layout_marginLeft="8dp">
 
             <TextView
                 android:id="@+id/min_quantity"
@@ -78,7 +78,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-
                     android:gravity="end">
 
                     <ImageButton

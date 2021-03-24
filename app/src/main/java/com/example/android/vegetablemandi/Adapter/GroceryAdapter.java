@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -54,7 +56,8 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         holder.min_weight.setText("Min " + String.valueOf(grocery.getMinimum_quantity()) + " " + grocery.getUnit());
         holder.vegetable_name.setText(grocery.getName());
         holder.price.setText(grocery.getFormatted_price() + "/" + grocery.getUnit());
-        //  holder.actual_quantity.setText(String.valueOf(grocery.getCart_quantity()));
+       // holder.actual_quantity.setText(String.valueOf(grocery.get()));
+       holder.actual_quantity.setText(String.valueOf(0));
         Glide.with(context)
                 .load(BASE_URL + grocery.getLogo())
                 .centerCrop()
@@ -98,6 +101,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
             this.onCartClickListener = onCartClickListener;
             increment.setOnClickListener(this);
             decrement.setOnClickListener(this);
+          //  itemView.setOnClickListener(this);
 
 //            increment.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -110,12 +114,12 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
 //
 //                }
 //            });
-
-
+//
+//
 //            decrement.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    if (actual_quantity.getText() != null && Integer.parseInt(actual_quantity.getText().toString()) >= 0) {
+//                    if (actual_quantity.getText() != null && Integer.parseInt(actual_quantity.getText().toString()) > 0) {
 //                        actual_quantity.setText(String.valueOf(Integer.parseInt(actual_quantity.getText().toString()) - value));
 //                    }
 //                }
@@ -126,9 +130,16 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.GroceryV
         public void onClick(View v) {
             if(v == decrement) {
                 onCartClickListener.onDeleteItemClick(getAdapterPosition());
+                if (actual_quantity.getText() != null && Integer.parseInt(actual_quantity.getText().toString()) > 0) {
+                    actual_quantity.setText(String.valueOf(Integer.parseInt(actual_quantity.getText().toString()) - value));
+                }
             }
             else if (v == increment) {
                 onCartClickListener.onAddItemClick(getAdapterPosition());
+                if (actual_quantity.getText() != null && Integer.parseInt(actual_quantity.getText().toString()) >= 0) {
+                    actual_quantity.setText(String.valueOf(Integer.parseInt(actual_quantity.getText().toString()) + value));
+
+                }
             }
         }
     }
