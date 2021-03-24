@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -270,6 +271,7 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
         Log.d(TAG, "onAddItemClick: "+filterList.size());
         if(filterList.size() > 0) {
             Grocery groceryData = filterList.get(position);
+
             CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
                     1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
            // groceryData.setCart_quantity(groceryData.getCart_quantity()+1);
@@ -277,6 +279,24 @@ public class MainActivity extends AppCompatActivity implements GroceryAdapter.On
             Log.d(TAG, "onAddItemClick: " + BASE_URL + groceryData.getIcon());
            // Toast.makeText(this, groceryData.getCart_quantity()+1, Toast.LENGTH_SHORT).show();
         }
+//        if(filterList.size() > 0) {
+//            final Grocery groceryData = filterList.get(position);
+//            List<CartEntity> cartEntityList = (List<CartEntity>) cartViewModel.getAllItems();
+//
+//                    if(cartEntityList.contains(groceryData.getName())) {
+//                        cartViewModel.updateQuantity(groceryData.getName());
+//                    }
+//                    else {
+//
+//                        CartEntity ce = new CartEntity(groceryData.getName(), groceryData.getPrice(), groceryData.getLogo(),
+//                                1, groceryData.getMinimum_quantity(), groceryData.getUnit(), BASE_URL + groceryData.getIcon());
+//                        // groceryData.setCart_quantity(groceryData.getCart_quantity() + 1);
+//                        cartViewModel.insert(ce);
+//                    }
+//                }
+
+
+
        else {
             final Grocery groceryData = groceryList.get(position);
 

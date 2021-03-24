@@ -34,6 +34,10 @@ public class CartRepository {
         new DeleteAllItemAsyncTask(cartDao).execute();
     }
 
+    public void updateQuantity() {
+        new UpdateQuantityItemAsyncTask(cartDao).execute();
+    }
+
     public LiveData<CartEntity> getItemByName(String name) {
         return cartDao.getItemByName(name);
     }
@@ -103,17 +107,17 @@ public class CartRepository {
         }
     }
 
-//    private static class UpdateQuantityItemAsyncTask extends AsyncTask<CartEntity, Void, Void> {
-//        private CartDao cartDao;
-//
-//        public UpdateQuantityItemAsyncTask(CartDao cartDao) {
-//            this.cartDao = cartDao;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(CartEntity... cartEntities) {
-//            cartDao.updateQuantity();
-//            return null;
-//        }
-//    }
+    private static class UpdateQuantityItemAsyncTask extends AsyncTask<String, Void, Void> {
+        private CartDao cartDao;
+
+        public UpdateQuantityItemAsyncTask(CartDao cartDao) {
+            this.cartDao = cartDao;
+        }
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            cartDao.updateQuantity(strings[0]);
+            return null;
+        }
+    }
 }

@@ -83,27 +83,29 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
     @Override
     public void onAddItemClick(final int position) {
 
-        Toast.makeText(getApplicationContext(),"onclick happening",Toast.LENGTH_SHORT).show();
-        LiveData<List<CartEntity>> cartEntityList = cartViewModel.getAllItems();
-        cartEntityList.observe(this, new Observer<List<CartEntity>>() {
-            @Override
-            public void onChanged(List<CartEntity> cartEntityList) {
-                try {
-                    if (cartEntityList.get(position).getActual_quantity() == 1 && (cartEntityList.indexOf(cartEntityList.get(position)) < cartEntityList.size())) {
-                        cartViewModel.delete(cartEntityList.get(position));
-                    }
-                }catch (Exception e) {
-                    Log.d("TAG", "onChanged: ");
-                    e.printStackTrace();
-                }
-            }
-        });
+
 //        cartViewModel.delete(grocery);
 //        cartViewModel.deleteAll();
     }
 //
-//    @Override
-//    public void onDeleteItemClick(int position) {
-//
-//    }
+    @Override
+    public void onDeleteItemClick(final int position) {
+//        Toast.makeText(getApplicationContext(),"onclick happening",Toast.LENGTH_SHORT).show();
+//        LiveData<List<CartEntity>> cartEntityList = cartViewModel.getAllItems();
+//        cartEntityList.observe(this, new Observer<List<CartEntity>>() {
+//            @Override
+//            public void onChanged(List<CartEntity> cartEntityList) {
+//                try {
+//                    if (cartEntityList.get(position).getActual_quantity() == 1 && (cartEntityList.indexOf(cartEntityList.get(position)) < cartEntityList.size())) {
+//                        cartViewModel.delete(cartEntityList.get(position));
+//                    }
+//                }catch (Exception e) {
+//                    Log.d("TAG", "onChanged: ");
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+
+        cartViewModel.delete(cartAdapter.getNoteAt(position));
+    }
 }

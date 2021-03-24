@@ -38,6 +38,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         cartList = g;
         notifyDataSetChanged();
     }
+
+    public CartEntity getNoteAt(int position) {
+        return cartList.get(position);
+    }
+
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -86,6 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             decrement= itemView.findViewById(R.id.decrement_cart);
             this.onCartClickListener = onCartClickListener;
             increment.setOnClickListener(this);
+            decrement.setOnClickListener(this);
 //
 //            increment.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -110,15 +116,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         @Override
         public void onClick(View v) {
-           // onCartClickListener.onDeleteItemClick(getAdapterPosition());
-            Log.d("TAG", "onClick: "+getAdapterPosition());
-            onCartClickListener.onAddItemClick(getAdapterPosition());
 
+            Log.d("TAG", "onClick: "+getAdapterPosition());
+            if(v == increment) {
+                onCartClickListener.onAddItemClick(getAdapterPosition());
+            }
+            else if (v == decrement) {
+
+                onCartClickListener.onDeleteItemClick(getAdapterPosition());
+            }
         }
 
     }
     public interface OnCartClickListener {
         void onAddItemClick(int position);
-      //  void onDeleteItemClick(int position);
+       void onDeleteItemClick(int position);
     }
 }
