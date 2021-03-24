@@ -34,6 +34,10 @@ public class CartViewModel extends AndroidViewModel {
         cartRepository.updateQuantity(name);
     }
 
+    public void decrementQuantity(String name) {
+        cartRepository.decrementQuantity(name);
+    }
+
     public void insert(CartEntity cartEntity) {
         cartRepository.insert(cartEntity);
     }

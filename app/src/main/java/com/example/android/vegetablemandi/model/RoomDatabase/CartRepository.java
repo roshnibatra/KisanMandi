@@ -41,6 +41,12 @@ public class CartRepository {
         return quantity;
     }
 
+    public int decrementQuantity(String name) {
+        new decrementQuantityItemAsyncTask(cartDao).execute(name);
+        // cartDao.updateQuantity(name);
+        return quantity;
+    }
+
     public LiveData<CartEntity> getItemByName(String name) {
         return cartDao.getItemByName(name);
     }
@@ -120,6 +126,20 @@ public class CartRepository {
         @Override
         protected Integer doInBackground(String... strings) {
             cartDao.updateQuantity(strings[0]);
+            return null;
+        }
+    }
+
+    private static class decrementQuantityItemAsyncTask extends AsyncTask<String, Void, Integer> {
+        private CartDao cartDao;
+
+        public decrementQuantityItemAsyncTask(CartDao cartDao) {
+            this.cartDao = cartDao;
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            cartDao.decrementQuantity(strings[0]);
             return null;
         }
     }

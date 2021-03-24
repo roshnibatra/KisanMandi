@@ -106,7 +106,12 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
 //            }
 //        });
 
-        if(cartAdapter.getNoteAt(position).getActual_quantity() == 1)
-        cartViewModel.delete(cartAdapter.getNoteAt(position));
+        CartEntity ce =cartAdapter.getNoteAt(position);
+        if(cartAdapter.getNoteAt(position).getActual_quantity() == 1) {
+            cartViewModel.delete(ce);
+        }
+        else {
+            cartViewModel.decrementQuantity(ce.name);
+        }
     }
 }
